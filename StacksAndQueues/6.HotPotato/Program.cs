@@ -10,8 +10,9 @@ namespace _6.HotPotato
 		{
 			string[] input = Console.ReadLine()
 				.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-			int count = int.Parse(Console.ReadLine());
-			Queue<string> children = new Queue<string>(input);
+			string countAsString = Console.ReadLine();
+			int count = int.Parse(countAsString);
+			var children = new Queue<string>(input);
 
 			while (children.Count != 1)
 			{
@@ -21,11 +22,12 @@ namespace _6.HotPotato
 					children.Enqueue(currentPlayer);
 				}
 
-				Console.WriteLine($"Removed {children.Dequeue()}");
+				string removedChild = children.Dequeue();
+				Console.WriteLine($"Removed {removedChild}");
 			}
 
-			Console.WriteLine($"Last is {children.Dequeue()}");
-
+			string lastChild = children.Dequeue();
+			Console.WriteLine($"Last is {lastChild}");
 		}
 	}
 }
