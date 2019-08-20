@@ -10,7 +10,7 @@ namespace _5.Supermarket
 		static void Main(string[] args)
 		{
 			string input = Console.ReadLine();
-			Queue<string> queue = new Queue<string>();
+			var queue = new Queue<string>();
 
 			while (input != "End")
 			{
@@ -18,7 +18,8 @@ namespace _5.Supermarket
 				{
 					while (queue.Count > 0)
 					{
-						Console.WriteLine(queue.Dequeue());
+						string dequeuedPerson = queue.Dequeue();
+						Console.WriteLine(dequeuedPerson);
 					}
 				}
 				else
@@ -29,7 +30,8 @@ namespace _5.Supermarket
 				input = Console.ReadLine();
 			}
 
-			Console.WriteLine($"{queue.Count} people remaining.");
+			int remainingPeople = queue.Count;
+			Console.WriteLine($"{remainingPeople} people remaining.");
 		}
 	}
 }
