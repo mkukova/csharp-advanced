@@ -8,10 +8,11 @@ namespace _03.MaximumAndMinimumElement
 	{
 		static void Main(string[] args)
 		{
-			int numberLines = int.Parse(Console.ReadLine());
+			string countAsString = Console.ReadLine();
+			int count = int.Parse(countAsString);
 			var stack = new Stack<int>();
 
-			for (int i = 0; i < numberLines; i++)
+			for (int i = 0; i < count; i++)
 			{
 				int[] input = Console.ReadLine()
 					.Split(" ")
@@ -21,36 +22,52 @@ namespace _03.MaximumAndMinimumElement
 				switch (input[0])
 				{
 					case 1:
-						stack.Push(input[1]);
-						break;
+						{
+							int numberToPush = input[1];
+							stack.Push(numberToPush);
+							break;
+						}
+
 					case 2:
-						if (stack.Any())
 						{
-							stack.Pop();
+							if (stack.Any())
+							{
+								stack.Pop();
+							}
+
+							break;
 						}
 
-						break;
 					case 3:
-						if (stack.Any())
 						{
-							Console.WriteLine(stack.Max());
+							if (stack.Any())
+							{
+								int maxElement = stack.Max();
+								Console.WriteLine(maxElement);
+							}
+
+							break;
 						}
 
-						break;
 					case 4:
-						if (stack.Any())
 						{
-							Console.WriteLine(stack.Min());
+							if (stack.Any())
+							{
+								int minElement = stack.Min();
+								Console.WriteLine(minElement);
+							}
+
+							break;
 						}
 
-						break;
 					default:
 						Console.WriteLine("Incorrect command!");
 						break;
 				}
 			}
 
-			Console.WriteLine(string.Join(", ", stack));
+			string output = string.Join(", ", stack);
+			Console.WriteLine(output);
 		}
 	}
 }
