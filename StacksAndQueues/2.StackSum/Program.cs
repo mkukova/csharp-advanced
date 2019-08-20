@@ -12,23 +12,26 @@ namespace _2.StackSum
 				.Split(" ")
 				.Select(int.Parse)
 				.ToArray();
-			string command = Console.ReadLine().ToLower();
-			Stack<int> result = new Stack<int>(numbers);
+			string command = Console.ReadLine()
+				.ToLower();
+			var result = new Stack<int>(numbers);
 
 			while (command != "end")
 			{
 				string[] input = command.Split();
+				string operation = input[0].ToLower();
 
-				if (input[0].ToLower() == "add")
+				if (operation == "add")
 				{
 					int firstNumber = int.Parse(input[1]);
 					int seconfNumber = int.Parse(input[2]);
 					result.Push(firstNumber);
 					result.Push(seconfNumber);
 				}
-				else if (input[0].ToLower() == "remove")
+				else if (operation == "remove")
 				{
 					int number = int.Parse(input[1]);
+
 					if (result.Count >= number)
 					{
 						for (int i = 0; i < number; i++)
@@ -41,7 +44,8 @@ namespace _2.StackSum
 				command = Console.ReadLine().ToLower();
 			}
 
-			Console.WriteLine($"Sum: {result.Sum()}");
+			int sum = result.Sum();
+			Console.WriteLine($"Sum: {sum}");
 		}
 	}
 }
