@@ -12,17 +12,18 @@ namespace _05.FashionBoutique
 				.Split(" ")
 				.Select(int.Parse)
 				.ToArray();
-			var stack = new Stack<int>(clothes);
-			int rackCapacity = int.Parse(Console.ReadLine());
+			var clothesStack = new Stack<int>(clothes);
+			string rackCapacityAsString = Console.ReadLine();
+			int rackCapacity = int.Parse(rackCapacityAsString);
 			int rackCounter = 0;
 
-			while (stack.Any())
+			while (clothesStack.Any())
 			{
 				int sum = 0;
 
-				while (sum != rackCapacity && stack.Any())
+				while (sum != rackCapacity && clothesStack.Any())
 				{
-					int currentClothe = stack.Peek();
+					int currentClothe = clothesStack.Peek();
 
 					if ((sum + currentClothe) > rackCapacity)
 					{
@@ -30,7 +31,7 @@ namespace _05.FashionBoutique
 					}
 
 					sum += currentClothe;
-					stack.Pop();
+					clothesStack.Pop();
 				}
 
 				rackCounter++;
