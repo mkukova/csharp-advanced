@@ -7,20 +7,23 @@ namespace _7.TrafficJam
 	{
 		static void Main(string[] args)
 		{
-			int carsToPass = int.Parse(Console.ReadLine());
+			string carsToPassAsString = Console.ReadLine();
+			int carsToPass = int.Parse(carsToPassAsString);
 			int passedCars = 0;
-			Queue<string> cars = new Queue<string>();
+			var cars = new Queue<string>();
 			string input = Console.ReadLine();
 
 			while (input != "end")
 			{
 				if (input == "green")
 				{
-					int count = Math.Min(carsToPass, cars.Count);
+					int carsCount = cars.Count;
+					int count = Math.Min(carsToPass, carsCount);
 
 					for (int i = 0; i < count; i++)
 					{
-						Console.WriteLine($"{cars.Dequeue()} passed!");
+						string currentCar = cars.Dequeue();
+						Console.WriteLine($"{currentCar} passed!");
 						passedCars++;
 					}
 				}
