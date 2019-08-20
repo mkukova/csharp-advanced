@@ -8,12 +8,19 @@ namespace _08.BalancedParenthesis
 	{
 		static void Main(string[] args)
 		{
-			Stack<char> parenthesis = new Stack<char>();
-			char[] input = Console.ReadLine().ToCharArray();
-			char[] openParenthesis = new char[] { '{', '[', '(' };
+			var parenthesis = new Stack<char>();
+			char[] input = Console.ReadLine()
+				.ToCharArray();
+			var openParenthesis = new char[]
+			{
+				'{',
+				'[',
+				'('
+			};
+
 			bool isValid = true;
 
-			foreach (var item in input)
+			foreach (char item in input)
 			{
 				if (openParenthesis.Contains(item))
 				{
