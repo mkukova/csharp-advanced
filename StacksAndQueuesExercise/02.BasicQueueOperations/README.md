@@ -8,7 +8,7 @@ Play around with a queue. You will be given an integer **N** representing the nu
 
 | **Input** | **Output** | **Comments** |
 | --- | --- | --- |
-| 5 2 321 13 45 32 4 | true   | We have to **enqueue 5** elements. Then we **dequeue**** 2 **of them. Finally, we have to check whether 13 is present in the queue. Since it is we print** true**. |
+| 5 2 3 2 1 13 45 32 4 | true   | We have to **enqueue 5** elements. Then we **dequeue**** 2 **of them. Finally, we have to check whether 13 is present in the queue. Since it is we print** true**. |
 | 4 1 666666 69 13 420 | 13 |   |
 | 3 3 9090 0 90 | 0 |   |
 

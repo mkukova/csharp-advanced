@@ -22,21 +22,29 @@ namespace _02.BasicQueueOperations
 
 			for (int i = 0; i < input[0]; i++)
 			{
-				resultNumbers.Enqueue(numbers[i]);
+				int currentNumber = numbers[i];
+				resultNumbers.Enqueue(currentNumber);
 			}
 
-			for (int i = 0; i < Math.Min(input[0], input[1]); i++)
+			int numberToEnqueue = input[0];
+			int numberToDequeue = input[1];
+			int dequeueCount = Math.Min(numberToEnqueue, numberToDequeue);
+
+			for (int i = 0; i < dequeueCount; i++)
 			{
 				resultNumbers.Dequeue();
 			}
+
+			int searchedNumber = input[2];
 
 			if (!resultNumbers.Any())
 			{
 				Console.WriteLine(0);
 			}
-			else if (!resultNumbers.Contains(input[2]))
+			else if (!resultNumbers.Contains(searchedNumber))
 			{
-				Console.WriteLine(resultNumbers.Min());
+				int minNumber = resultNumbers.Min();
+				Console.WriteLine(minNumber);
 			}
 			else
 			{
