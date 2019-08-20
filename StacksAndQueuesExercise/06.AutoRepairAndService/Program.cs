@@ -22,35 +22,45 @@ namespace _06.AutoRepairAndService
 				switch (splittedCommand[0])
 				{
 					case "Service":
-						if (!vehicles.Any())
 						{
+							if (!vehicles.Any())
+							{
+								break;
+							}
+
+							string currentVehicle = vehicles.Dequeue();
+							servedVehicles.Push(currentVehicle);
+							Console.WriteLine($" Vehicle { currentVehicle} got served.");
 							break;
 						}
 
-						string currentVehicle = vehicles.Dequeue();
-						servedVehicles.Push(currentVehicle);
-						Console.WriteLine($" Vehicle { currentVehicle} got served.");
-						break;
 					case "History":
-						Console.WriteLine(string.Join(", ", servedVehicles));
-						break;
+						{
+							Console.WriteLine(string.Join(", ", servedVehicles));
+							break;
+						}
+
 					case "CarInfo":
-						string searchedCar = splittedCommand[1];
-						if (servedVehicles.Contains(searchedCar))
 						{
-							Console.WriteLine("Served.");
+							string searchedCar = splittedCommand[1];
+							if (servedVehicles.Contains(searchedCar))
+							{
+								Console.WriteLine("Served.");
+							}
+
+							if (vehicles.Contains(searchedCar))
+							{
+								Console.WriteLine("Still waiting for service.");
+							}
+
+							break;
 						}
 
-						if (vehicles.Contains(searchedCar))
-						{
-							Console.WriteLine("Still waiting for service.");
-						}
-
-						break;
 					default:
 						Console.WriteLine("Incorrect command!");
 						break;
 				}
+
 				command = Console.ReadLine();
 			}
 
