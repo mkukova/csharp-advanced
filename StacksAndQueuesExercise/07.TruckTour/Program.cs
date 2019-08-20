@@ -8,7 +8,8 @@ namespace _07.TruckTour
 	{
 		static void Main(string[] args)
 		{
-			int petrolPumpsCount = int.Parse(Console.ReadLine());
+			string input = Console.ReadLine();
+			int petrolPumpsCount = int.Parse(input);
 			var petrolPumps = new Queue<int[]>();
 
 			for (int i = 0; i < petrolPumpsCount; i++)
@@ -22,12 +23,11 @@ namespace _07.TruckTour
 
 			int index = 0;
 
-
 			while (true)
 			{
 				int totalFuel = 0;
 
-				foreach (var petrolPump in petrolPumps)
+				foreach (int[] petrolPump in petrolPumps)
 				{
 					int petrolAmount = petrolPump[0];
 					int distance = petrolPump[1];
@@ -36,7 +36,8 @@ namespace _07.TruckTour
 
 					if (totalFuel < 0)
 					{
-						petrolPumps.Enqueue(petrolPumps.Dequeue());
+						int[] currentPetrolPump = petrolPumps.Dequeue();
+						petrolPumps.Enqueue(currentPetrolPump);
 						index++;
 						break;
 					}
