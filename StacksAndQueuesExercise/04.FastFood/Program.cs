@@ -8,13 +8,15 @@ namespace _04.FastFood
 	{
 		static void Main(string[] args)
 		{
-			int foodQuantity = int.Parse(Console.ReadLine());
+			string foodQuantityAsString = Console.ReadLine();
+			int foodQuantity = int.Parse(foodQuantityAsString);
 			int[] ordersQuantity = Console.ReadLine()
 				.Split(" ")
 				.Select(int.Parse)
 				.ToArray();
 			var queue = new Queue<int>(ordersQuantity);
-			Console.WriteLine(queue.Max());
+			int maxElement = queue.Max();
+			Console.WriteLine(maxElement);
 
 			while (queue.Any())
 			{
@@ -33,9 +35,10 @@ namespace _04.FastFood
 
 			if (queue.Any())
 			{
-				Console.WriteLine($"Orders left: {string.Join(" ", queue)}");
+				string leftOrders = string.Join(" ", queue);
+				Console.WriteLine($"Orders left: {leftOrders}");
 			}
-			else 
+			else
 			{
 				Console.WriteLine("Orders complete");
 			}
