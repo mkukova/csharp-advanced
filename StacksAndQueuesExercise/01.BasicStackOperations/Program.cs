@@ -22,11 +22,12 @@ namespace _01.BasicStackOperations
 				.Select(int.Parse)
 				.ToArray();
 
-			Stack<int> result = new Stack<int>();
+			var result = new Stack<int>();
 
 			for (int i = 0; i < numberElementsToPush; i++)
 			{
-				result.Push(numbers[i]);
+				int currentNumber = numbers[i];
+				result.Push(currentNumber);
 			}
 
 			for (int i = 0; i < numberElementsToPop; i++)
@@ -45,7 +46,8 @@ namespace _01.BasicStackOperations
 			}
 			else if (result.Any())
 			{
-				Console.WriteLine(result.Min());
+				int minElement = result.Min();
+				Console.WriteLine(minElement);
 			}
 			else
 			{
