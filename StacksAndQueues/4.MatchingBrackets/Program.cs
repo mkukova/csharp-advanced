@@ -7,21 +7,23 @@ namespace _4.MatchingBrackets
 	{
 		static void Main(string[] args)
 		{
-			var input = Console.ReadLine();
+			string input = Console.ReadLine();
 			var stack = new Stack<int>();
+			int inputLenght = input.Length;
 
-			for (int i = 0; i < input.Length; i++)
+			for (int i = 0; i < inputLenght; i++)
 			{
-				char ch = input[i];
+				char currentSymbol = input[i];
 
-				if (ch == '(')
+				if (currentSymbol == '(')
 				{
 					stack.Push(i);
 				}
-				else if (ch == ')')
+				else if (currentSymbol == ')')
 				{
 					int startIndex = stack.Pop();
-					string contents = input.Substring(startIndex, i - startIndex + 1);
+					int substringLenght = i - startIndex + 1;
+					string contents = input.Substring(startIndex, substringLenght);
 					Console.WriteLine(contents);
 				}
 			}
