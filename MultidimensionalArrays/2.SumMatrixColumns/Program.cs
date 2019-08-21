@@ -13,6 +13,7 @@ namespace _2.SumMatrixColumns
 				.ToArray();
 
 			int[,] matrix = new int[size[0], size[1]];
+			int[] sum = new int[size[1]];
 
 			for (int i = 0; i < matrix.GetLength(0); i++)
 			{
@@ -24,22 +25,12 @@ namespace _2.SumMatrixColumns
 				for (int j = 0; j < matrix.GetLength(1); j++)
 				{
 					matrix[i, j] = tokens[j];
+					sum[j] += tokens[j];
 				}
 			}
 
-			int sum = 0;
-
-			for (int col = 0; col < matrix.GetLength(1); col++)
-			{
-				sum = 0;
-
-				for (int row = 0; row < matrix.GetLength(0); row++)
-				{
-					sum += matrix[row, col];
-				}
-
-				Console.WriteLine(sum);
-			}
+			string result = string.Join(Environment.NewLine, sum);
+			Console.WriteLine(result);
 		}
 	}
 }
