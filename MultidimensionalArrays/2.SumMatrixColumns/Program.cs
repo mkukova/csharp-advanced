@@ -7,20 +7,23 @@ namespace _2.SumMatrixColumns
 	{
 		static void Main(string[] args)
 		{
-			int[] size = Console.ReadLine()
+			int[] input = Console.ReadLine()
 				.Split(", ", StringSplitOptions.RemoveEmptyEntries)
 				.Select(int.Parse)
 				.ToArray();
 
-			int[,] matrix = new int[size[0], size[1]];
-			int[] sum = new int[size[1]];
+			int row = input[0];
+			int col = input[1];
+
+			var matrix = new int[row, col];
+			var sum = new int[col];
 
 			for (int i = 0; i < matrix.GetLength(0); i++)
 			{
 				int[] tokens = Console.ReadLine()
-				.Split()
-				.Select(int.Parse)
-				.ToArray();
+					.Split()
+					.Select(int.Parse)
+					.ToArray();
 
 				for (int j = 0; j < matrix.GetLength(1); j++)
 				{
