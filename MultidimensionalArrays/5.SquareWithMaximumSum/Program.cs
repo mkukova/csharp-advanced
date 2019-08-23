@@ -17,9 +17,9 @@ namespace _5.SquareWithMaximumSum
 			for (int i = 0; i < matrix.GetLength(0); i++)
 			{
 				int[] tokens = Console.ReadLine()
-				.Split(", ", StringSplitOptions.RemoveEmptyEntries)
-				.Select(int.Parse)
-				.ToArray();
+					.Split(", ", StringSplitOptions.RemoveEmptyEntries)
+					.Select(int.Parse)
+					.ToArray();
 
 				for (int j = 0; j < matrix.GetLength(1); j++)
 				{
@@ -47,11 +47,17 @@ namespace _5.SquareWithMaximumSum
 				}
 			}
 
-			Console.WriteLine($"{matrix[selectedRow, selectedCol]} " +
-				$"{matrix[selectedRow, selectedCol + 1]}\n" +
-				$"{matrix[selectedRow + 1, selectedCol]} " +
-	$"{matrix[selectedRow + 1, selectedCol + 1]}\n" +
-	$"{maxSum}");
+			for (int i = selectedRow; i < selectedRow + 2; i++)
+			{
+				for (int y = selectedCol; y < selectedCol + 2; y++)
+				{
+					Console.Write($"{matrix[i, y]} ");
+				}
+
+				Console.WriteLine();
+			}
+
+			Console.WriteLine(maxSum);
 		}
 	}
 }
