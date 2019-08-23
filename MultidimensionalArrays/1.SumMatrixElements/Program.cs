@@ -29,8 +29,11 @@ namespace _1.SumMatrixElements
 				}
 			}
 
-			Console.WriteLine(arr.GetLength(0));
-			Console.WriteLine(arr.GetLength(1));
+			int rowCount = arr.GetLength(0);
+			int colCount = arr.GetLength(1);
+
+			Console.WriteLine(rowCount);
+			Console.WriteLine(colCount);
 			Console.WriteLine(sum);
 		}
 	}
