@@ -34,6 +34,11 @@ namespace _8.Bombs
 				int currentCol = coordinates[i + 1];
 				int value = matrix[currentRow, currentCol];
 
+				if (value < 0)
+				{
+					continue;
+				}
+
 				for (int row = currentRow - 1; row <= currentRow + 1; row++)
 				{
 					for (int col = currentCol - 1; col <= currentCol + 1; col++)
@@ -69,7 +74,6 @@ namespace _8.Bombs
 			for (int i = 0; i < size; i++)
 			{
 				string[] result = new string[size];
-
 				for (int j = 0; j < size; j++)
 				{
 					result[j] = matrix[i, j].ToString();
