@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace _05.RecordUniqueNames
 {
@@ -6,7 +8,19 @@ namespace _05.RecordUniqueNames
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			int count = int.Parse(Console.ReadLine());
+			var uniqueNames = new HashSet<string>();
+
+			for (int i = 0; i < count; i++)
+			{
+				string name = Console.ReadLine();
+				uniqueNames.Add(name);
+			}
+
+			foreach (string name in uniqueNames)
+			{
+				Console.WriteLine(name);
+			}
 		}
 	}
 }
