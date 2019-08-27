@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace _3.PrimaryDiagonal
 {
@@ -6,7 +7,30 @@ namespace _3.PrimaryDiagonal
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			int size = int.Parse(Console.ReadLine());
+			int[,] array = new int[size, size];
+
+			for (int i = 0; i < size; i++)
+			{
+				int[] numbers = Console.ReadLine()
+					.Split(" ")
+					.Select(int.Parse)
+					.ToArray();
+
+				for (int j = 0; j < size; j++)
+				{
+					array[i, j] = numbers[j];
+				}
+			}
+
+			int sum = 0;
+
+			for (int i = 0; i < size; i++)
+			{
+				sum += array[i, i];
+			}
+
+			Console.WriteLine(sum);
 		}
 	}
 }
