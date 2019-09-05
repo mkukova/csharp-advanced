@@ -8,23 +8,27 @@ namespace _01.OddLines
 		static void Main(string[] args)
 		{
 			string path = "files";
-			string fileName = "Input.txt";
-			string filePath = Path.Combine(path, fileName);
+			string inputFilePath = Path.Combine(path, "Input.txt");
+			string outputFilePath = Path.Combine(path, "Output.txt");
 
-			using (var reader = new StreamReader(filePath))
+			using (var reader = new StreamReader(inputFilePath))
 			{
 				int count = 0;
 				string line = reader.ReadLine();
 
-				while (line != null)
+				using (var writer = new StreamWriter(outputFilePath))
 				{
-					if (count % 2 != 0)
+					while (line != null)
 					{
-						Console.WriteLine(line);
-					}
+						if (count % 2 != 0)
+						{
+							writer.WriteLine(line);
+							Console.WriteLine(line);
+						}
 
-					count++;
-					line = reader.ReadLine();
+						count++;
+						line = reader.ReadLine();
+					}
 				}
 			}
 		}
