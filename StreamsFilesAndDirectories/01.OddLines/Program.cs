@@ -10,13 +10,15 @@ namespace _01.OddLines
 			string path = "files";
 			string inputFilePath = Path.Combine(path, "Input.txt");
 			string outputFilePath = Path.Combine(path, "Output.txt");
+			StreamReader reader = new StreamReader(inputFilePath);
 
-			using (var reader = new StreamReader(inputFilePath))
+			using (reader)
 			{
 				int count = 0;
 				string line = reader.ReadLine();
+				StreamWriter writer = new StreamWriter(outputFilePath);
 
-				using (var writer = new StreamWriter(outputFilePath))
+				using (writer)
 				{
 					while (line != null)
 					{
