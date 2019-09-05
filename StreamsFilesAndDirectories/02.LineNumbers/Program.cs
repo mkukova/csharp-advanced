@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace _02.LineNumbers
 {
@@ -6,7 +7,11 @@ namespace _02.LineNumbers
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			string path = "files";
+			string fileName = "Input.txt";
+			string filePath = Path.Combine(path, fileName);
+
+
 		}
 	}
 }
