@@ -6,4 +6,10 @@
     <RootNamespace>_05.SliceAFile</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="files\sliceMe.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
