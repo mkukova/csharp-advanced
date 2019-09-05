@@ -6,4 +6,31 @@
     <RootNamespace>_06.FolderSize</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="TestFolder\1. Java-Advanced-Stacks-and-Queues-Exercises.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFolder\1. Java-Advanced-Stacks-and-Queues-Lab.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFolder\1. Java-Advanced-Stacks-and-Queues.pptx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFolder\2. Simple-Calculations-Exercises.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFolder\TestFolder2\1. Java-Advanced-Stacks-and-Queues-Exercises.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFolder\TestFolder2\1. Java-Advanced-Stacks-and-Queues-Lab.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFolder\TestFolder2\1. Java-Advanced-Stacks-and-Queues.pptx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFolder\TestFolder2\2. Simple-Calculations-Exercises.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
