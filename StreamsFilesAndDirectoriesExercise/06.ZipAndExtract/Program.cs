@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.IO;
+using System.IO.Compression;
 
 namespace _06.ZipAndExtract
 {
@@ -6,7 +7,14 @@ namespace _06.ZipAndExtract
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			string zipFile = @"..\..\..\myNewZip.zip";
+			string file = "copyMe.png";
+			ZipArchive archive = ZipFile.Open(zipFile, ZipArchiveMode.Create);
+
+			using (archive)
+			{
+				archive.CreateEntryFromFile(file, Path.GetFileName(file));
+			}
 		}
 	}
 }
