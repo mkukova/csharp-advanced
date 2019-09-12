@@ -6,7 +6,13 @@ namespace _02.KnightsOfHonor
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			Action<string[]> printNames = names =>
+				Console.WriteLine("Sir " + string.Join(Environment.NewLine + "Sir ", names));
+
+			string[] inputNames = Console.ReadLine()
+				.Split();
+
+			printNames(inputNames);
 		}
 	}
 }
