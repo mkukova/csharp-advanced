@@ -16,24 +16,14 @@ namespace _09.ListOfPredicates
 				.Distinct()
 				.ToArray();
 
-			var predicates = new List<Predicate<int>>();
-
-			foreach (int currentNumber in dividers)
+			for (int i = 0; i < dividers.Length; i++)
 			{
-				predicates.Add(x => x % currentNumber == 0);
-			}
-
-			for (int i = 0; i < numbers.Count; i++)
-			{
-				foreach (Predicate<int> currentPredicate in predicates)
-				{
-					if (!currentPredicate(numbers[i]))
+				Predicate<int> divisible = num =>
 					{
-						numbers.Remove(numbers[i]);
-						i--;
-						break;
-					}
-				}
+						return num % dividers[i] == 0;
+					};
+
+				numbers = numbers.FindAll(divisible);
 			}
 
 			Console.WriteLine(string.Join(" ", numbers));
