@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace _03.CustomMinFunction
 {
@@ -6,7 +7,28 @@ namespace _03.CustomMinFunction
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			Func<int[], int> minFunction = numbers =>
+				{
+					int minValue = int.MaxValue;
+
+					foreach (int number in numbers)
+					{
+						if (number < minValue)
+						{
+							minValue = number;
+						}
+					}
+
+					return minValue;
+				};
+
+			int[] inputNumbers = Console.ReadLine()
+				.Split()
+				.Select(int.Parse)
+				.ToArray();
+
+			int minNumber = minFunction(inputNumbers);
+			Console.WriteLine(minNumber);
 		}
 	}
 }
