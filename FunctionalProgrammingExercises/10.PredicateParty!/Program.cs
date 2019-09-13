@@ -43,19 +43,17 @@ namespace _10.PredicateParty_
 					continue;
 				}
 
-				switch (command[1])
+				if (command[1] == "StartsWith")
 				{
-					case "StartsWith":
-						ForeachName(command[0], comming, n => n.StartsWith(command[2]));
-						break;
-					case "EndsWith":
-						ForeachName(command[0], comming, n => n.EndsWith(command[2]));
-						break;
-					case "Length":
-						ForeachName(command[0], comming, n => n.Length == int.Parse(command[2]));
-						break;
-					default:
-						break;
+					ForeachName(command[0], comming, n => n.StartsWith(command[2]));
+				}
+				else if (command[1] == "EndsWith")
+				{
+					ForeachName(command[0], comming, n => n.EndsWith(command[2]));
+				}
+				else if (command[1] == "Length")
+				{
+					ForeachName(command[0], comming, n => n.Length == int.Parse(command[2]));
 				}
 
 				command = Console.ReadLine()
@@ -69,20 +67,17 @@ namespace _10.PredicateParty_
 			{
 				if (condition(comming[i]))
 				{
-					switch (command)
+					if (command == "Remove")
 					{
-						case "Remove":
-							comming.RemoveAt(i);
-							break;
-						case "Double":
-							comming.Add(comming[i]);
-							break;
-						default:
-							break;
+						comming.RemoveAt(i);
+					}
+					else if (command == "Double")
+					{
+						comming.Add(comming[i]);
 					}
 				}
 			}
 		}
 	}
 }
-}
+
