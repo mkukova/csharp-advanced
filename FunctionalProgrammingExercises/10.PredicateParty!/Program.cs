@@ -8,29 +8,81 @@ namespace _10.PredicateParty_
 	{
 		static void Main(string[] args)
 		{
-			List<string> guests = Console.ReadLine()
-				.Split(" ", StringSplitOptions.RemoveEmptyEntries)
+			var comming = Console.ReadLine()
+				.Split(new char[] { ' ', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries)
 				.ToList();
 
-			Func<string, string, bool> startsWithFilter = (name, param)
-				=> name.StartsWith(param);
-			Func<string, string, bool> endsWithFilter = (name, param)
-				=> name.EndsWith(param);
-			Func<string, int, bool> lengthFilter = (name, length)
-				=> name.Length == length;
+			ExecuteCommands(comming);
+			PrintCommingList(comming);
+		}
 
-			string command = Console.ReadLine();
-
-			while (command != "Party!")
+		private static void PrintCommingList(List<string> comming)
+		{
+			if (comming.Any())
 			{
-				string[] splitttedCommand = command
-					.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-				string action = splitttedCommand[0];
-				string filter = splitttedCommand[1];
-				string param = splitttedCommand[2];
+				var names = string.Join(", ", comming);
+				Console.WriteLine($"{names} are going to the party!");
+			}
+			else
+			{
+				Console.WriteLine("Nobody is going to the party!");
+			}
+		}
 
-				command = Console.ReadLine();
+		private static void ExecuteCommands(List<string> comming)
+		{
+			var command = Console.ReadLine()
+				.Split(new char[] { ' ', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
+			while (command[0] != "Party!")
+			{
+				if (command.Length < 3)
+				{
+					command = Console.ReadLine()
+						.Split(new char[] { ' ', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+					continue;
+				}
+
+				switch (command[1])
+				{
+					case "StartsWith":
+						ForeachName(command[0], comming, n => n.StartsWith(command[2]));
+						break;
+					case "EndsWith":
+						ForeachName(command[0], comming, n => n.EndsWith(command[2]));
+						break;
+					case "Length":
+						ForeachName(command[0], comming, n => n.Length == int.Parse(command[2]));
+						break;
+					default:
+						break;
+				}
+
+				command = Console.ReadLine()
+					.Split(new char[] { ' ', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+			}
+		}
+
+		private static void ForeachName(string command, List<string> comming, Func<string, bool> condition)
+		{
+			for (int i = comming.Count - 1; i >= 0; i--)
+			{
+				if (condition(comming[i]))
+				{
+					switch (command)
+					{
+						case "Remove":
+							comming.RemoveAt(i);
+							break;
+						case "Double":
+							comming.Add(comming[i]);
+							break;
+						default:
+							break;
+					}
+				}
 			}
 		}
 	}
+}
 }
