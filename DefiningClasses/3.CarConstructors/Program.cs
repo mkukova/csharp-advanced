@@ -6,7 +6,19 @@ namespace _3.CarConstructors
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			string make = Console.ReadLine();
+			string model = Console.ReadLine();
+			int year = int.Parse(Console.ReadLine());
+			double fuel = double.Parse(Console.ReadLine());
+			double fuelConsumption = double.Parse(Console.ReadLine());
+
+			Car firstCar = new Car();
+			Car secondCar = new Car(make, model, year);
+			Car thirdCar = new Car(make, model, year, fuel, fuelConsumption);
+
+			Console.WriteLine(firstCar.WhoAmI());
+			Console.WriteLine(secondCar.WhoAmI());
+			Console.WriteLine(thirdCar.WhoAmI());
 		}
 	}
 }
