@@ -8,6 +8,7 @@ namespace _1.Car
 	{
 		private int year;
 		private string make;
+		private string model;
 		public string Make
 		{
 			get
@@ -20,37 +21,6 @@ namespace _1.Car
 			}
 		}
 		public string Model { get; set; }
-		public int Year
-		{
-			get
-			{
-				if (year < 5)
-				{
-					return year;
-				}
-
-				return year - 3;
-			}
-		}
-
-		public Car()
-		{
-			year = 1;
-		}
-
-		 public Car(int years)
-		{
-			this.year = years;
-		}
-
-		public int RealAge()
-		{
-			return year;
-		}
-
-		public void GetOld(int years)
-		{
-			year += years; 
-		}
+		public int Year { get; set; }
 	}
 }
