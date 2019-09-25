@@ -11,7 +11,6 @@ namespace _3.CarConstructors
 		private int year;
 		private double fuel;
 
-
 		public string Model { get; set; }
 		public string Make { get; set; }
 		public int Year { get; set; }
