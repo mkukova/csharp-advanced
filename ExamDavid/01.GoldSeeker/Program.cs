@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace _01.SpaceshipCrafting
 {
@@ -14,23 +14,33 @@ namespace _01.SpaceshipCrafting
 			"Left"
 		};
 
+		public static int allDiamonds = 0;
+		public static int ourGuyDiamondsCounter = 0;
+		public static int someGuyDiamondsCounter = 0;
+
 		static void Main(string[] args)
 		{
 			string[,] field = CreateField();
+			Console.Clear();
 			DrawField(field);
-		}
+			string direction = Direction();
+			Console.Clear();
 
-		public static void PrintField(string[,] field)
-		{
-			for (int i = 0; i < field.GetLength(0); i++)
+			while (direction != "ESC" && AreThereDiamonds(field))
 			{
-				for (int j = 0; j < field.GetLength(1); j++)
-				{
-					Console.Write(field[i, j] + "  ");
-				}
-
-				Console.WriteLine();
+				MoveOurGuy(field, direction);
+				MoveSomeGuy(field);
+				System.Threading.Thread.Sleep(100);
+				Console.Clear();
+				DrawField(field);
+				direction = Direction();
 			}
+
+			Console.Clear();
+
+			int ourGuyDiamondProcent = ourGuyDiamondsCounter * 100 / allDiamonds;
+			Console.WriteLine($"OurDuy diamonds procent: {ourGuyDiamondProcent}%.");
+			Console.WriteLine("Game over!");
 		}
 
 		public static int[] GetFieldBounds(int maxX, int maxY)
@@ -88,7 +98,7 @@ namespace _01.SpaceshipCrafting
 			}
 		}
 
-		public static string[,] CreateField()
+		static string[,] CreateField()
 		{
 			int[] size = GetFieldBounds(50, 50);
 
@@ -106,12 +116,13 @@ namespace _01.SpaceshipCrafting
 
 			field[ourGuyRow, ourGuyCol] = "OurGuy";
 
-			double groundCells = Math.Ceiling(0.4 * fieldCells);
-			double grassCells = Math.Ceiling(0.3 * fieldCells);
-			double treeCells = Math.Ceiling(0.2 * fieldCells);
-			double stoneCells = Math.Ceiling(0.1 * fieldCells);
-			double diamondCells = stoneCells;
+			double groundCells = Math.Round(0.4 * fieldCells);
+			double grassCells = Math.Round(0.3 * fieldCells);
+			double treeCells = Math.Round(0.2 * fieldCells);
+			double stoneCells = Math.Round(0.1 * fieldCells);
+			double diamondCells = Math.Round(0.1 * fieldCells);
 			double someGuyCells = Math.Round(0.05 * fieldCells);
+			allDiamonds = (int)diamondCells;
 
 			InsertElementToField(field, groundCells, "Ground");
 			InsertElementToField(field, grassCells, "Grass");
@@ -136,7 +147,7 @@ namespace _01.SpaceshipCrafting
 
 		public static void DrawField(string[,] field)
 		{
-			Console.OutputEncoding = Encoding.UTF8;
+			Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 			for (int row = 0; row < field.GetLength(0); row++)
 			{
@@ -172,7 +183,7 @@ namespace _01.SpaceshipCrafting
 							break;
 						case "Stone":
 							{
-								Console.ForegroundColor = ConsoleColor.DarkGray;
+								Console.ForegroundColor = ConsoleColor.Gray;
 								Console.Write('\u00A9');
 								Console.ResetColor();
 							}
@@ -180,7 +191,7 @@ namespace _01.SpaceshipCrafting
 							break;
 						case "Diamond":
 							{
-								Console.ForegroundColor = ConsoleColor.Gray;
+								Console.ForegroundColor = ConsoleColor.DarkGray;
 								Console.Write('\u2666');
 								Console.ResetColor();
 							}
@@ -189,7 +200,7 @@ namespace _01.SpaceshipCrafting
 						case "SomeGuy":
 							{
 								Console.ForegroundColor = ConsoleColor.Blue;
-								Console.Write('\u263B');
+								Console.Write('\u263b');
 								Console.ResetColor();
 							}
 
@@ -197,7 +208,7 @@ namespace _01.SpaceshipCrafting
 						case "OurGuy":
 							{
 								Console.ForegroundColor = ConsoleColor.Red;
-								Console.Write('\u263A');
+								Console.Write('\u263a');
 								Console.ResetColor();
 							}
 
@@ -231,34 +242,125 @@ namespace _01.SpaceshipCrafting
 				case ConsoleKey.RightArrow:
 					return "Right";
 				case ConsoleKey.Escape:
-					break;
+					return "ESC";
 			}
 
 			return null;
 		}
 
-		public static void MoveGuy(string[,] field, int currentRow, int currentCol)
+		public static void MoveGuy(string[,] field, int currentRow, int currentCol, string direction, string guy)
 		{
-			string direction = Direction();
-
 			switch (direction)
 			{
 				case "Up":
-					if (isInside(field, currentRow - 1, currentCol)
-						&& (field[currentRow - 1, currentCol] == "Ground"
-						|| field[currentRow - 1, currentCol] == "Grass"
-						|| field[currentRow - 1, currentCol] == "Diamond"))
+					if (CanMove(field, currentRow - 1, currentCol))
 					{
-						field[currentRow - 1, currentCol] = "OurGuy";
+						DiamondCounter(field, currentRow - 1, currentCol, guy);
+						field[currentRow - 1, currentCol] = guy;
 						field[currentRow, currentCol] = "Ground";
 					}
 					return;
 				case "Down":
+					if (CanMove(field, currentRow + 1, currentCol))
+					{
+						DiamondCounter(field, currentRow + 1, currentCol, guy);
+						field[currentRow + 1, currentCol] = guy;
+						field[currentRow, currentCol] = "Ground";
+					}
 					return;
 				case "Left":
+					if (CanMove(field, currentRow, currentCol - 1))
+					{
+						DiamondCounter(field, currentRow, currentCol - 1, guy);
+						field[currentRow, currentCol - 1] = guy;
+						field[currentRow, currentCol] = "Ground";
+					}
 					return;
 				case "Right":
+					if (CanMove(field, currentRow, currentCol + 1))
+					{
+						DiamondCounter(field, currentRow, currentCol + 1, guy);
+						field[currentRow, currentCol + 1] = guy;
+						field[currentRow, currentCol] = "Ground";
+					}
 					return;
+			}
+		}
+
+		public static List<int> Find(string[,] field, string element)
+		{
+			List<int> coordinates = new List<int>();
+
+			for (int i = 0; i < field.GetLength(0); i++)
+			{
+				for (int j = 0; j < field.GetLength(1); j++)
+				{
+					if (field[i, j] == element)
+					{
+						coordinates.Add(i);
+						coordinates.Add(j);
+					}
+				}
+			}
+
+			return coordinates;
+		}
+
+		public static void MoveOurGuy(string[,] field, string direction)
+		{
+			List<int> coordinates = Find(field, "OurGuy");
+			int row = coordinates[0];
+			int col = coordinates[1];
+			MoveGuy(field, row, col, direction, "OurGuy");
+		}
+
+		public static void MoveSomeGuy(string[,] field)
+		{
+			List<int> coordinates = Find(field, "SomeGuy");
+
+			for (int i = 0; i < coordinates.Count / 2; i += 2)
+			{
+				int row = coordinates[i];
+				int col = coordinates[i + 1];
+				Random rnd = new Random();
+				int position = rnd.Next(0, 4);
+				string direction = commands.ElementAt(position);
+				MoveGuy(field, row, col, direction, "SomeGuy");
+			}
+		}
+
+		public static bool AreThereDiamonds(string[,] field)
+		{
+			List<int> coordinates = Find(field, "Diamond");
+
+			if (coordinates.Any())
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		public static bool CanMove(string[,] field, int desiredRow, int desiredCol)
+		{
+			return isInside(field, desiredRow, desiredCol)
+						&& (field[desiredRow, desiredCol] == "Ground"
+						|| field[desiredRow, desiredCol] == "Grass"
+						|| field[desiredRow, desiredCol] == "Diamond");
+		}
+
+		public static void DiamondCounter(string[,] field, int row, int col, string guy)
+		{
+			if (field[row, col] == "Diamond")
+			{
+				if (guy == "OurGuy")
+				{
+					ourGuyDiamondsCounter++;
+				}
+				else if (guy == "SomeGuy")
+				{
+					someGuyDiamondsCounter++;
+				}
 			}
 		}
 	}
