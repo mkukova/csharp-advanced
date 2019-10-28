@@ -6,7 +6,8 @@ namespace _02.ArrayCreator
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			string[] strings = ArrayCreator.Create(5, "Pesho");
+			int[] integers = ArrayCreator.Create(10, 33);
 		}
 	}
 }
